@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNDR Actualités</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#003366">
+</head>
+<body>
+
+    <button id="ouvrir-parametres" class="icone-menu">☰</button>
+
+    <header>
+    <img src="logo.png" alt="UNDR L'Espoir" class="logo">
+    <p data-i18n="soustitre">Actualités et activités du Parti UNDR</p>
+</header>
+
+    <div class="filtres" id="filtres-list">
+        <button class="filtre-btn actif" data-categorie="Toutes">Toutes</button>
+        <button class="filtre-btn" data-categorie="Actualités">Actualités</button>
+        <button class="filtre-btn" data-categorie="Activités">Activités</button>
+        <button class="filtre-btn" data-categorie="Communiqués">Communiqués</button>
+        <button class="filtre-btn" data-categorie="Portraits des membres du BNE">Portraits des membres du BNE</button>
+        <button class="filtre-btn" data-categorie="Actualités Tchad">Actualités Tchad</button>
+        <button class="filtre-btn" data-categorie="Actualités Politique">Actualités Politique</button>
+        <button class="filtre-btn" data-categorie="Divertissement">Divertissement</button>
+    </div>
+
+    <button id="menu-toggle" class="menu-toggle">☰ Filtres</button>
+
+    <div class="formulaire" id="formulaire-ajout">
+        <h2 data-i18n="form_titre">Ajouter un article</h2>
+        <input type="text" id="nouveau-titre" placeholder="Titre de l'article">
+        <select id="nouvelle-categorie">
+            <option value="Actualités">Actualités</option>
+            <option value="Activités">Activités</option>
+            <option value="Communiqués">Communiqués</option>
+            <option value="Portraits des membres du BNE">Portraits des membres du BNE</option>
+            <option value="Actualités Tchad">Actualités Tchad</option>
+            <option value="Actualités Politique">Actualités Politique</option>
+            <option value="Divertissement">Divertissement</option>
+        </select>
+        <textarea id="nouveau-resume" placeholder="Résumé de l'article"></textarea>
+
+        <label style="display:block; margin-top:10px; font-size:14px;">Image de l'article :</label>
+        <input type="file" id="nouvelle-image" accept="image/*">
+
+        <label style="display:block; margin-top:10px; font-size:14px;">Lien vidéo (YouTube/Facebook, optionnel) :</label>
+        <input type="text" id="nouvelle-video" placeholder="https://...">
+
+        <button id="bouton-publier" data-i18n="btn_publier">Publier</button>
+    </div>
+
+    <main id="liste-articles" class="grille-articles"></main>
+
+    <div id="vue-detail" class="vue-detail" style="display:none;">
+        <button id="retour-liste" class="retour-btn" data-i18n="btn_retour">← Retour</button>
+        <img id="detail-img" class="article-img" alt="">
+        <div id="detail-video-zone"></div>
+        <span id="detail-badge" class="badge"></span>
+        <h2 id="detail-titre"></h2>
+        <p id="detail-date" class="date"></p>
+        <p id="detail-vues" class="date"></p>
+        <p id="detail-resume"></p>
+        <div id="lire-aussi" class="lire-aussi"></div>
+    </div>
+
+    <button id="toggle-direct" class="direct-btn" data-i18n="btn_direct_ouvrir">🔴 Suivre le Direct</button>
+
+    <div id="zone-direct" class="zone-direct" style="display:none;">
+        <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FAssembleenationaleTchad&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false"
+            width="100%"
+            height="700"
+            style="border:none;overflow:hidden"
+            scrolling="no"
+            frameborder="0"
+            allowfullscreen="true"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+        </iframe>
+    </div>
+
+    <div class="chat-box">
+        <h2 data-i18n="chat_titre">Chat en direct</h2>
+        <div id="chat-messages" class="chat-messages"></div>
+        <div class="chat-input-row">
+            <input type="text" id="chat-pseudo" placeholder="Votre nom" maxlength="20">
+            <input type="text" id="chat-message" placeholder="Votre message">
+            <button id="chat-envoyer" data-i18n="btn_envoyer">Envoyer</button>
+        </div>
+    </div>
+
+    <footer class="pied-de-page">
+        <p>© 2026 UNDR Actualités — Tous droits réservés</p>
+        <p class="contact-info">
+            📞 <a href="tel:+23566797751">+235 66 79 77 51</a>
+            &nbsp;|&nbsp;
+            ✉️ <a href="mailto:gouatainebienvenu3@gmail.com">gouatainebienvenu3@gmail.com</a>
+        </p>
+        <button id="partager-app" class="partager-btn" data-i18n="btn_partager">📤 Partager l'application</button>
+        <button id="mode-admin" class="mode-admin-btn">Administration</button>
+    </footer>
+
+    <div id="panneau-parametres" class="panneau-parametres" style="display:none;">
+        <div class="parametres-contenu">
+            <button id="fermer-parametres" class="fermer-parametres-btn">✖</button>
+            <h3>Paramètres</h3>
+
+            <p>Langue</p>
+            <div class="choix-langue">
+                <button class="lang-btn" data-lang="fr">Français</button>
+                <button class="lang-btn" data-lang="en">English</button>
+                <button class="lang-btn" data-lang="ar">العربية</button>
+            </div>
+
+            <p>Apparence</p>
+            <label class="switch-sombre">
+                <input type="checkbox" id="toggle-sombre">
+                Mode sombre
+            </label>
+
+            <p>Taille du texte</p>
+            <div class="choix-taille">
+                <button class="taille-btn" data-taille="petit">A-</button>
+                <button class="taille-btn" data-taille="normal">A</button>
+                <button class="taille-btn" data-taille="grand">A+</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="chat.js"></script>
+
+</body>
+</html>
